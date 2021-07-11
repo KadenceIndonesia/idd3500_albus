@@ -7,7 +7,7 @@ const loginRoutes = require("./routes/login")
 const session = require("express-session")
 
 global.baseurl = function(){
-	var url = "http://localhost:"+process.env.PORT+"/";
+	var url = process.env.DOMAIN+":"+process.env.PORT+"/";
     return url;
 }
 const app = express();
