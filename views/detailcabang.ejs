@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard - Festive <%= login[0].pid %></title>
+    <link rel = "icon" href = "https://kadence.com/wp-content/uploads/2020/07/260x260.png" type = "image/x-icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="<%= baseurl() %>plugin/flexmonster/theme/green/flexmonster.css"></script>
+    <%- include ('./partials/header') %>
+</head>
+<style>
+    .overview{
+        padding: 10px 30px;
+        background-color: #ffffff;
+        border-radius: 8px;
+    }
+</style>
+<body>
+<div class="wrapper">
+	<div class="lSide">
+		<%- include ('./partials/sidebar') %>
+	</div>
+	<div class="rSide">
+		<div class="head desk">
+			<%- include ('./partials/topdesk') %>
+		</div>
+		<div class="mainbox size-std column">
+			<div class="breadcrumbs size-std">
+				<a href="<%= baseurl() %>">DASHBOARD <%= login[0].nameses %></a> > <a href="<%= baseurl() %>report/detail">List Cabang</a> > <%= idc %>
+			</div>
+			<div class="cols-12 containt" style="margin: 20px 0;">
+				<div class="headtitle trans" style="margin-bottom: 0;">
+					<p class="size-head3 nopad">Achievement By City</p>
+				</div>
+				<div style="width: 100%;">
+					<div class="chartbox">
+						<div id="chartContainer" style="height: 370px; max-width: 100%; width: 100%; margin: 0px auto;"></div>
+					</div>
+				</div>
+            </div>
+            <div class="cols-6 containt" style="margin: 20px 0;">
+				<div class="headtitle trans" style="margin-bottom: 0;">
+					<p class="size-head3 nopad">Achievement By Age</p>
+				</div>
+				<div style="width: 100%;">
+					<div class="chartbox">
+						<div id="achievement_2" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="cols-6 containt" style="margin: 20px 0;">
+				<div class="headtitle trans" style="margin-bottom: 0;">
+					<p class="size-head3 nopad">Achievement By SES</p>
+				</div>
+				<div style="width: 100%;">
+					<div class="chartbox">
+						<div id="achievement_3" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<%- include ('./partials/footer') %>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</html>

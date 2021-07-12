@@ -4,6 +4,7 @@ const ejs = require("ejs")
 require("dotenv").config()
 const indexRoutes = require("./routes/index");
 const loginRoutes = require("./routes/login")
+const reportRoutes = require("./routes/report")
 const session = require("express-session")
 
 global.baseurl = function(){
@@ -22,6 +23,11 @@ app.use(session({
 }))
 app.use("/", indexRoutes)
 app.use("/login", loginRoutes)
+app.use("/report", reportRoutes)
+app.get("/logout", (req,res) => {
+    req.session.destroy();
+    res.redirect("/login")
+})
 
 app.listen(process.env.PORT, (req,res) => {
     
