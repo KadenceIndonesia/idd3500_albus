@@ -9,6 +9,48 @@ exports.getDetail = async function(req,res){
     }
 }
 
+exports.getDetailSalesBooth = async function(req,res){
+    if(req.session.loggedin==true){
+        const login = req.session.data
+        res.render("detail/salesbooth",{
+            login: login
+        })
+    }else{
+        res.redirect("../../login")
+    }
+}
+
+exports.getDetailServicePoint = async function(req,res){
+    if(req.session.loggedin==true){
+        const login = req.session.data
+        res.render("detail/servicepoint",{
+            login: login
+        })
+    }else{
+        res.redirect("../../login")
+    }
+}
+exports.getDetailCec = async function(req,res){
+    if(req.session.loggedin==true){
+        const login = req.session.data
+        res.render("detail/cec",{
+            login: login
+        })
+    }else{
+        res.redirect("../../login")
+    }
+}
+exports.getDetailKyc = async function(req,res){
+    if(req.session.loggedin==true){
+        const login = req.session.data
+        res.render("detail/kyc",{
+            login: login
+        })
+    }else{
+        res.redirect("../../login")
+    }
+}
+
 exports.getDetailCabang = async function(req,res){
     const idc = req.params.idc
     if(req.session.loggedin==true){

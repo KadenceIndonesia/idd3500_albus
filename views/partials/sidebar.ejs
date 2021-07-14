@@ -10,7 +10,14 @@
                 <li><a href="<%= baseurl() %>report/ach/table">Table</a></li>                      
             </ul>
         </li>
-        <li><a href="<%= baseurl() %>report/detail" class="size-std"><img src="<%= baseurl() %>images/icon/table_grey.png"> Detail Cabang</a></li>
+        <li><p class="nopad accord size-std" href="#evidence"><img src="<%= baseurl() %>images/icon/file_grey.png"> File Evidence</p>
+            <ul class="submenu size-std" id="evidence">
+                <li><a href="<%= baseurl() %>report/detail/salesbooth">Sales Booth</a></li>
+                <li><a href="<%= baseurl() %>report/detail/servicepoint">Service Point</a></li>
+                <li><a href="<%= baseurl() %>report/detail/cec">CEC</a></li>
+                <li><a href="<%= baseurl() %>report/detail/kyc">KYC</a></li>
+            </ul>
+        </li>
         <li><a href="<%= baseurl() %>logout" class="size-std"><img src="<%= baseurl() %>images/icon/logout_grey.png">Logout</a></li>
     </ul>
 </div>
