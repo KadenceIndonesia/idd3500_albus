@@ -2,24 +2,12 @@ const path = require("path")
 const axios = require("axios")
 const session = require("express-session")
 require("dotenv").config()
+require("../library")
+
 exports.getLogin = (req,res)=>{
     res.render("login")
 }
-global.getAuth = function(pid, email, pass){
-    return new Promise(resolve => {
-        axios.post(process.env.APIURL+'/auth/login',{
-            pid: pid,
-            email: email,
-            password: pass
-        })
-        .then((response) => {
-            resolve(response.data)
-        })
-        .catch((error) => {
-            resolve(err)
-        })
-    })
-}
+
 exports.getAuth = async function(req,res){
     var pid = req.body.pid
     var email = req.body.email

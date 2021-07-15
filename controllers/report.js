@@ -4,6 +4,7 @@ const axios = require("axios")
 const pid = process.env.PID
 const moment = require("moment")
 const { getJsDateFromExcel } = require("excel-date-to-js");
+require("../library")
 
 const dataKota = [
     {"label": "Jabodetabek", "code": 1},
@@ -76,49 +77,6 @@ exports.getDetail = async function(req,res){
 
 
 
-
-global.getEvdById = function(id){
-    return new Promise(resolve => {
-        Task.find({id: id}).exec()
-        .then(response => {
-            resolve(response)
-        })
-        .catch(error => {
-            resolve(error)
-        })
-    })
-}
-global.getData = function(pid, touchpoint){
-    return new Promise(resolve => {
-        axios.get(process.env.APIURL+"/api/"+pid+"%2F"+touchpoint)
-        .then((response) => {
-            resolve(response.data)
-        })
-        .catch(error => {
-            resolve(error)
-        })
-    })
-}
-global.getKepoEvd = function(touchpointCode){
-    return new Promise(resolve => {
-        Task.find({}).exec()
-        .then(response => {
-            var dt = []
-            for (let i = 0; i < response.length; i++) {
-                var getCode = response[i].code
-                var getTouchPoint = getCode.substr(0, 2)
-                var touchPoint = parseInt(getTouchPoint)
-                if(touchPoint == touchpointCode){
-                    dt.push(response[i])
-                }
-            }
-            resolve(dt)
-        })
-        .catch(error => {
-            resolve(error)
-        })
-    })
-}
 
 exports.getDetailSalesBooth = async function(req,res){
     if(req.session.loggedin==true){
@@ -197,8 +155,46 @@ exports.getDetailServicePoint = async function(req,res){
 exports.getDetailCec = async function(req,res){
     if(req.session.loggedin==true){
         const login = req.session.data
+        var dataCecChat = await getData(pid, "cec%2Fchat")
+        var dataCecCall = await getData(pid, "cec%2Fcallcenter")
+        var dataCecTwitter = await getData(pid, "cec%2Ftwitter")
+        var dataCecEmail = await getData(pid, "cec%2Femail")
+        var data = []
+        for (let i = 0; i < dataCecChat.length; i++) {
+            data.push({
+                id: dataCecChat[i].SbjNum,
+                datems: moment(getJsDateFromExcel(dataCecChat[i].TglChat)).format("D-MM-YYYY"),
+                channel: "Call Center",
+                agent: dataCecChat[i].NamaAgent
+            })
+        }
+        for (let i = 0; i < dataCecCall.length; i++) {
+            data.push({
+                id: dataCecCall[i].SbjNum,
+                datems: moment(getJsDateFromExcel(dataCecCall[i].TglPanggilan)).format("D-MM-YYYY"),
+                channel: "Chat",
+                agent: dataCecCall[i].NamaAgent
+            })
+        }
+        for (let i = 0; i < dataCecTwitter.length; i++) {
+            data.push({
+                id: dataCecTwitter[i].SbjNum,
+                datems: moment(getJsDateFromExcel(dataCecTwitter[i].TglChat)).format("D-MM-YYYY"),
+                channel: "Twitter",
+                agent: dataCecTwitter[i].NamaAgentJCC
+            })
+        }
+        for (let i = 0; i < dataCecEmail.length; i++) {
+            data.push({
+                id: dataCecEmail[i].SbjNum,
+                datems: moment(getJsDateFromExcel(dataCecEmail[i].TglEmail)).format("D-MM-YYYY"),
+                channel: "E-mail",
+                agent: dataCecEmail[i].NamaAgent
+            })
+        }
         res.render("detail/cec",{
-            login: login
+            login: login,
+            data: data
         })
     }else{
         res.redirect("../../login")
@@ -207,8 +203,18 @@ exports.getDetailCec = async function(req,res){
 exports.getDetailKyc = async function(req,res){
     if(req.session.loggedin==true){
         const login = req.session.data
+        var dataExcel = await getData(pid, "servicepoint")
+        var data = []
+        for (let i = 0; i < dataExcel.length; i++) {
+            data.push({
+                id: dataExcel[i].SbjNum,
+                datems: moment(getJsDateFromExcel(dataExcel[i].TglVideo)).format("D-MM-YYYY"),
+                agent: dataExcel[i].NamaAgent
+            })
+        }
         res.render("detail/kyc",{
-            login: login
+            login: login,
+            data: data
         })
     }else{
         res.redirect("../../login")

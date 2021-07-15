@@ -33,7 +33,7 @@
     }
 </style>
 <body>
-<div class="wrapper">
+<div class="wrapper" ng-app="myApp" ng-controller="PageCtrl">
 	<div class="lSide">
 		<%- include ('../partials/sidebar') %>
 	</div>
@@ -49,13 +49,13 @@
                 <div class="list-control" style="border-bottom: none;">
                     <div class="list-control-box spc-rl">
                         <span class="size-std">Channel</span>
-                        <select name="" id="channel" class="size-std" >
+                        <select name="channel" ng-model="search" id="channel" class="size-std" >
                             <option value="all">-- All --</option>
-                            <option value="">Call Center</option>
-                            <option value="">Chat</option>
-                            <option value="">E-mail</option>
-                            <option value="">Twitter</option>
-                            <option value="">Jenius Customer Care</option>
+                            <option value="Call Center">Call Center</option>
+                            <option value="Chat">Chat</option>
+                            <option value="E-mail">E-mail</option>
+                            <option value="Twitter">Twitter</option>
+                            <option value="Jenius Customer Care">Jenius Customer Care</option>
                         </select>
                     </div>
                     <div class="list-control-box spc-rl">
@@ -82,12 +82,12 @@
                         <th style="width: 200px;">Conversation Evidence </th>
                         <th style="width: 200px;">Supporting Evidence </th>
                     </tr>
-                    <tr dir-paginate="req in skenario | orderBy:sortKey:reverse | filter: search | itemsPerPage:20">
+                    <tr dir-paginate="req in evidence | orderBy:sortKey:reverse | filter: search | itemsPerPage:20">
                         <td>{{req.datems}}</td>
                         <td>{{req.channel}}</td>
                         <td>{{req.agent}}</td>
-                        <td align="center"><a href="<%= baseurl() %>report/detail/test" target="_blank">View</a></td>
-                        <td align="center"><a href="<%= baseurl() %>report/detail/test" target="_blank">View</a></td>
+                        <td align="center"><a href="<%= baseurl() %>report/detail/evidence/{{req.id}}">View</a></td>
+                        <td align="center"><a href="<%= baseurl() %>report/detail/evidence/{{req.id}}">View</a></td>
                     </tr>
                 </table>
                 <dir-pagination-controls direction-links="true" boundary-links="true" class="size-std"></dir-pagination-controls>
@@ -97,5 +97,49 @@
 </div>
 </body>
 <%- include ('../partials/footer') %>
+<script>
+    var app = angular.module('myApp',[]);
+    var app = angular.module('myApp',['angularUtils.directives.dirPagination']);
+    app.controller('PageCtrl',function ($scope, $http) {
+        var jsoon = <%- JSON.stringify(data) %>
+        $scope.evidence = jsoon;
+        $scope.column = '';
+        $scope.sorttype = '';
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse
+            $scope.column = keyname
+            if($scope.reverse){
+                $scope.sorttype = true
+            }else{
+                $scope.sorttype = false
+            }
+        }
+        // $scope.column = 'total_skor';
+        // $scope.sortColumn = function(col){
+        //     $scope.column = col;
+        //     if($scope.reverse){
+        //         $scope.reverse = false;
+        //         $scope.reverseclass = 'sortUp';
+        //     }else{
+        //         $scope.reverse = true;
+        //         $scope.reverseclass = 'sortDown';
+        //     }
+        // };
+        $scope.sortClass = function(col){
+            if($scope.column == col ){
+                if($scope.sorttype == true){
+                    return 'sortDown'; 
+                }else{
+                    return 'sortUp';
+                }
+            }else{
+                return '';
+            }
+        } 
+    })
+</script>
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script src="<%= baseurl() %>js/dirPagination.js" type="text/javascript"></script>
+<script src="<%= baseurl() %>js/angular/angular.js" type="text/javascript"></script>
 </html>
