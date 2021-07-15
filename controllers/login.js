@@ -7,7 +7,7 @@ exports.getLogin = (req,res)=>{
 }
 global.getAuth = function(pid, email, pass){
     return new Promise(resolve => {
-        axios.post('http://localhost:3333/auth/login',{
+        axios.post(process.env.APIURL+'/auth/login',{
             pid: pid,
             email: email,
             password: pass
