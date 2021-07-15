@@ -14,9 +14,26 @@
         background-color: #ffffff;
         border-radius: 8px;
     }
+    .sortUp{
+        height: 15px;
+        width: 15px;
+        vertical-align: middle;
+        background-image: url(<%= baseurl() %>images/icon/arrow-up.png);
+        background-size: 100%;
+        float: right;
+    }
+    .sortDown{
+        height: 15px;
+        width: 15px;
+        vertical-align: middle;
+        background-image: url(<%= baseurl() %>images/icon/arrow-up.png);
+        transform: rotate(180deg);
+        background-size: 100%;
+        float: right;
+    }
 </style>
 <body>
-<div class="wrapper">
+<div class="wrapper" ng-app="myApp" ng-controller="PageCtrl">
 	<div class="lSide">
 		<%- include ('../partials/sidebar') %>
 	</div>
@@ -31,22 +48,27 @@
             <form class="control">
                 <div class="list-control" style="border-bottom: none;">
                     <div class="list-control-box spc-rl">
-                        <span class="size-std">Show By Area</span>
-                        <select name="" id="area" class="size-std" >
-                            <option value="all">-- All --</option>
+                        <span class="size-std">Show By City</span>
+                        <select name="city" id="city" class="size-std" ng-model="search">
+                            <option value=""></option>
+                            <% for(let i=0; i < datakota.length ;i++){ %> 
+                            <option value="<%= datakota[i].label %>"><%= datakota[i].label %></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="list-control-box spc-rl">
-                        <span class="size-std">Show By Cabang</span>
-                        <select name="" id="cabang" class="size-std">
-                            <option value="all">-- All --</option>
+                        <span class="size-std">Show By Malls</span>
+                        <select name="malls" id="malls" class="size-std" ng-model="search">
+                            <option value=""></option>
+                            <% for(let i=0; i < datamalls.length ;i++){ %> 
+                            <option value="<%= datamalls[i].label %>"><%= datamalls[i].label %></option>
+                            <% } %>
                         </select>
                     </div>
                     <div class="list-control-box spc-rl">
                         <input type="search" name="search" ng-model="search" placeholder="Search">
                     </div>
                     <div class="list-control-box size-std spc-rl">
-                        <button type="submit" class="myButton-submit">Show</button>
                         <button type="reset" class="myButton-submit">Clear</button>
                     </div>
                 </div>
@@ -66,12 +88,12 @@
                         <th style="text-align: left; cursor: pointer;" ng-click="sort('agent')">Name of Agent <div ng-class="sortClass('agent')"></div></th>
                         <th style="width: 100px;">Evidence </th>
                     </tr>
-                    <tr dir-paginate="req in skenario | orderBy:sortKey:reverse | filter: search | itemsPerPage:20">
-                        <td>{{req.area}}</td>
-                        <td>{{req.area}}</td>
-                        <td>{{req.cabang}}</td>
-                        <td>{{req.cabang}}</td>
-                        <td align="center"><a href="<%= baseurl() %>report/detail/test" target="_blank">View</a></td>
+                    <tr dir-paginate="req in evidence | orderBy:sortKey:reverse | filter: search | itemsPerPage:20">
+                        <td>{{req.datems}}</td>
+                        <td>{{req.city}}</td>
+                        <td>{{req.malls}}</td>
+                        <td>{{req.agent}}</td>
+                        <td align="center"><a href="<%= baseurl() %>report/detail/evidence/{{req.id}}">View</a></td>
                     </tr>
                 </table>
                 <dir-pagination-controls direction-links="true" boundary-links="true" class="size-std"></dir-pagination-controls>
@@ -81,5 +103,49 @@
 </div>
 </body>
 <%- include ('../partials/footer') %>
+<script>
+    var app = angular.module('myApp',[]);
+    var app = angular.module('myApp',['angularUtils.directives.dirPagination']);
+    app.controller('PageCtrl',function ($scope, $http) {
+        var jsoon = <%- JSON.stringify(data) %>
+        $scope.evidence = jsoon;
+        $scope.column = '';
+        $scope.sorttype = '';
+        $scope.sort = function (keyname) {
+            $scope.sortKey = keyname;
+            $scope.reverse = !$scope.reverse
+            $scope.column = keyname
+            if($scope.reverse){
+                $scope.sorttype = true
+            }else{
+                $scope.sorttype = false
+            }
+        }
+        // $scope.column = 'total_skor';
+        // $scope.sortColumn = function(col){
+        //     $scope.column = col;
+        //     if($scope.reverse){
+        //         $scope.reverse = false;
+        //         $scope.reverseclass = 'sortUp';
+        //     }else{
+        //         $scope.reverse = true;
+        //         $scope.reverseclass = 'sortDown';
+        //     }
+        // };
+        $scope.sortClass = function(col){
+            if($scope.column == col ){
+                if($scope.sorttype == true){
+                    return 'sortDown'; 
+                }else{
+                    return 'sortUp';
+                }
+            }else{
+                return '';
+            }
+        } 
+    })
+</script>
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script src="<%= baseurl() %>js/dirPagination.js" type="text/javascript"></script>
+<script src="<%= baseurl() %>js/angular/angular.js" type="text/javascript"></script>
 </html>

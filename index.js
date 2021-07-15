@@ -6,6 +6,11 @@ const indexRoutes = require("./routes/index");
 const loginRoutes = require("./routes/login")
 const reportRoutes = require("./routes/report")
 const session = require("express-session")
+const mongoose = require("mongoose")
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).catch(error => handleError(error));
 
 global.baseurl = function(){
 	var url = process.env.DOMAIN+":"+process.env.PORT+"/";
