@@ -43,11 +43,21 @@
             </div>
 			<div class="cols-12 containt" style="margin: 20px 0;">
 				<div class="headtitle trans" style="margin-bottom: 0;">
-					<p class="size-head3 nopad">Achievement By Skenario</p>
+					<p class="size-head3 nopad">Achievement</p>
 				</div>
 				<div style="width: 100%;">
 					<div class="chartbox">
-						<div id="chartContainer" style="height: 400px; max-width: 100%; width: 100%; margin: 0px auto;"></div>
+						<div id="chartAchievement" style="height: 400px; max-width: 100%; width: 100%; margin: 0px auto;"></div>
+					</div>
+				</div>
+            </div>
+			<div class="cols-12 containt" style="margin: 20px 0;">
+				<div class="headtitle trans" style="margin-bottom: 0;">
+					<p class="size-head3 nopad">Detail CEC</p>
+				</div>
+				<div style="width: 100%;">
+					<div class="chartbox">
+						<div id="detailCec" style="height: 400px; max-width: 100%; width: 100%; margin: 0px auto;"></div>
 					</div>
 				</div>
             </div>
@@ -65,7 +75,7 @@ window.onload = function () {
             "#04773B",
             "#036016",
     ]);
-    var options = {
+    var achievement = {
 		colorSet: "flexmonsterStyle",
 		exportEnabled: true,
 		animationEnabled: true,
@@ -90,7 +100,34 @@ window.onload = function () {
 		}
 		]
 	};
-    $("#chartContainer").CanvasJSChart(options);
+    $("#chartAchievement").CanvasJSChart(achievement);
+
+	var detailcec = {
+		colorSet: "flexmonsterStyle",
+		exportEnabled: true,
+		animationEnabled: true,
+		axisY:{
+			minimum: 0,
+			maximum: 100,
+		},
+		axisX: {
+			title: " ",
+			labelFontSize: 12,
+			labelWrap: true
+		},
+		data: [              
+		{
+			type: "column",
+			legendText: "{label} %",
+			indexLabel: "{label} - {y}%",
+			indexLabelFontSize: 12,
+			yValueFormatString: "#0.##",
+			toolTipContent: "<b>{label}</b>: {count}({y}%)",
+			dataPoints: <%- JSON.stringify(detailcec) %>
+		}
+		]
+	};
+    $("#detailCec").CanvasJSChart(detailcec);
 }
 </script>
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>

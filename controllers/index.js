@@ -22,10 +22,17 @@ exports.getIndex = async function(req,res){
             {label: "CEC", target: 65, y: parseFloat((countCec * 100 / 65).toFixed(2)), count: countCec, color: "#04773B" },
             {label: "KYC", target: 25, y: parseFloat((dataKyc.length * 100 / 25).toFixed(2)), count: dataKyc.length, color: "#036016" },
         ]
+        const detailCec = [
+            {label: "Chat", target: 30, y: parseFloat((dataCecChat.length * 100 / 60).toFixed(2)), count: dataCecChat.length, color: "#069E2D" },
+            {label: "Call", target: 30, y: parseFloat((dataCecCall.length * 100 / 60).toFixed(2)), count: dataCecCall.length, color: "#058E3F" },
+            {label: "Email", target: 30, y: parseFloat((dataCecEmail.length * 100 / 60).toFixed(2)), count: dataCecEmail.length, color: "#04773B" },
+            {label: "Twitter", target: 30, y: parseFloat((dataCecTwitter.length * 100 / 60).toFixed(2)), count: dataCecTwitter.length, color: "#036016" }
+        ]
 
         res.render("index",{
             login: login,
-            achievement: achievement
+            achievement: achievement,
+            detailcec: detailCec
         })
     }else{
         res.redirect("./login")
