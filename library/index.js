@@ -57,7 +57,7 @@ global.getAuth = function(pid, email, pass){
             resolve(response.data)
         })
         .catch((error) => {
-            resolve(err)
+            resolve(error)
         })
     })
 }

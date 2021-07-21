@@ -15,7 +15,8 @@ exports.getIndex = async function(req,res){
         var dataCecCall = await getData(pid, "cec%2Fcallcenter")
         var dataCecTwitter = await getData(pid, "cec%2Ftwitter")
         var dataCecEmail = await getData(pid, "cec%2Femail")
-        var countCec = dataCecChat.length + dataCecCall.length + dataCecTwitter.length + dataCecEmail.length
+        // var countCec = dataCecChat.length + dataCecCall.length + dataCecTwitter.length + dataCecEmail.length
+        var countCec = 0
         const achievement = [
             {label: "Sales Booth", target: 60, y: parseFloat((dataSalesBooth.length * 100 / 60).toFixed(2)), count: dataSalesBooth.length, color: "#069E2D" },
             {label: "Service Point", target: 40, y: parseFloat((dataServicePoint.length * 100 / 40).toFixed(2)), count: dataServicePoint.length, color: "#058E3F" },
