@@ -160,38 +160,38 @@ exports.getDetailCec = async function(req,res){
         var dataCecTwitter = await getData(pid, "cec%2Ftwitter")
         var dataCecEmail = await getData(pid, "cec%2Femail")
         var data = []
-        for (let i = 0; i < dataCecChat.length; i++) {
-            data.push({
-                id: dataCecChat[i].SbjNum,
-                datems: moment(getJsDateFromExcel(dataCecChat[i].TglChat)).format("D-MM-YYYY"),
-                channel: "Call Center",
-                agent: dataCecChat[i].NamaAgent
-            })
-        }
-        for (let i = 0; i < dataCecCall.length; i++) {
-            data.push({
-                id: dataCecCall[i].SbjNum,
-                datems: moment(getJsDateFromExcel(dataCecCall[i].TglPanggilan)).format("D-MM-YYYY"),
-                channel: "Chat",
-                agent: dataCecCall[i].NamaAgent
-            })
-        }
-        for (let i = 0; i < dataCecTwitter.length; i++) {
-            data.push({
-                id: dataCecTwitter[i].SbjNum,
-                datems: moment(getJsDateFromExcel(dataCecTwitter[i].TglChat)).format("D-MM-YYYY"),
-                channel: "Twitter",
-                agent: dataCecTwitter[i].NamaAgentJCC
-            })
-        }
-        for (let i = 0; i < dataCecEmail.length; i++) {
-            data.push({
-                id: dataCecEmail[i].SbjNum,
-                datems: moment(getJsDateFromExcel(dataCecEmail[i].TglEmail)).format("D-MM-YYYY"),
-                channel: "E-mail",
-                agent: dataCecEmail[i].NamaAgent
-            })
-        }
+        // for (let i = 0; i < dataCecChat.length; i++) {
+        //     data.push({
+        //         id: dataCecChat[i].SbjNum,
+        //         datems: moment(getJsDateFromExcel(dataCecChat[i].TglChat)).format("D-MM-YYYY"),
+        //         channel: "Call Center",
+        //         agent: dataCecChat[i].NamaAgent
+        //     })
+        // }
+        // for (let i = 0; i < dataCecCall.length; i++) {
+        //     data.push({
+        //         id: dataCecCall[i].SbjNum,
+        //         datems: moment(getJsDateFromExcel(dataCecCall[i].TglPanggilan)).format("D-MM-YYYY"),
+        //         channel: "Chat",
+        //         agent: dataCecCall[i].NamaAgent
+        //     })
+        // }
+        // for (let i = 0; i < dataCecTwitter.length; i++) {
+        //     data.push({
+        //         id: dataCecTwitter[i].SbjNum,
+        //         datems: moment(getJsDateFromExcel(dataCecTwitter[i].TglChat)).format("D-MM-YYYY"),
+        //         channel: "Twitter",
+        //         agent: dataCecTwitter[i].NamaAgentJCC
+        //     })
+        // }
+        // for (let i = 0; i < dataCecEmail.length; i++) {
+        //     data.push({
+        //         id: dataCecEmail[i].SbjNum,
+        //         datems: moment(getJsDateFromExcel(dataCecEmail[i].TglEmail)).format("D-MM-YYYY"),
+        //         channel: "E-mail",
+        //         agent: dataCecEmail[i].NamaAgent
+        //     })
+        // }
         res.render("detail/cec",{
             login: login,
             data: data
