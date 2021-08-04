@@ -29,6 +29,9 @@
 				<a href="<%= baseurl() %>">DASHBOARD <%= login[0].nameses %></a> > <a href="<%= baseurl() %>report/detail">List Cabang</a> > <%= idc %>
 			</div>
 			<div class="cols-12">
+                <% if(data.length<=0){ %>
+                    no data to display
+                <% }else{ %>
 				<!-- Tabgrid -->
 				<div class="tabgrid full-length">
 					<ul>
@@ -63,6 +66,7 @@
 					</div>
 				</div>
                 <!-- Tabgrid -->
+                <% } %>
 			</div>
 		</div>
 	</div>
