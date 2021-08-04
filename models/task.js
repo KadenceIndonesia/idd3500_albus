@@ -13,7 +13,9 @@ const taskSchema = mongoose.Schema({
     filename: Array,
     src: String,
     grp: String,
-    uploadtime: String
+    uploadtime: String,
+    type: String,
+    subtype: String
 })
 
 module.exports = mongoose.model('Task', taskSchema);

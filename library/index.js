@@ -20,13 +20,26 @@ global.getKepoEvd = function(touchpointCode){
             var dt = []
             for (let i = 0; i < response.length; i++) {
                 var getCode = response[i].code
-                var getTouchPoint = getCode.substr(0, 2)
+                var tostr = ''+getCode
+                var getTouchPoint = tostr.substr(0, 2)
                 var touchPoint = parseInt(getTouchPoint)
                 if(touchPoint == touchpointCode){
                     dt.push(response[i])
                 }
             }
             resolve(dt)
+        })
+        .catch(error => {
+            resolve(error)
+        })
+    })
+}
+
+global.getAllEvd = function(){
+    return new Promise(resolve => {
+        Task.find({}).exec()
+        .then(response => {
+            resolve(response)
         })
         .catch(error => {
             resolve(error)

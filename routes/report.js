@@ -8,6 +8,7 @@ Router.get("/detail/servicepoint", reportControllers.getDetailServicePoint)
 Router.get("/detail/cec", reportControllers.getDetailCec)
 Router.get("/detail/kyc", reportControllers.getDetailKyc)
 Router.get("/detail/evidence/:idc", reportControllers.getDetailCabang)
+Router.get("/detail/evidence/:idc/:type", reportControllers.getDetailCabangType)
 Router.get("/ach/table", reportControllers.getAchTable)
 Router.get("/ach/chart", reportControllers.getAchChart)
 

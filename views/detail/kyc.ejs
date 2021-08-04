@@ -69,7 +69,7 @@
                         <th style="text-align: left; cursor: pointer;" ng-click="sort('agent')">Name of Agent <div ng-class="sortClass('agent')"></div></th>
                         <th style="width: 100px;">Evidence </th>
                     </tr>
-                    <tr dir-paginate="req in skenario | orderBy:sortKey:reverse | filter: search | itemsPerPage:20">
+                    <tr dir-paginate="req in evidence | orderBy:sortKey:reverse | filter: search | itemsPerPage:20">
                         <td>{{req.datems}}</td>
                         <td>{{req.agent}}</td>
                         <td align="center"><a href="<%= baseurl() %>report/detail/evidence/{{req.id}}">View</a></td>
@@ -100,17 +100,6 @@
                 $scope.sorttype = false
             }
         }
-        // $scope.column = 'total_skor';
-        // $scope.sortColumn = function(col){
-        //     $scope.column = col;
-        //     if($scope.reverse){
-        //         $scope.reverse = false;
-        //         $scope.reverseclass = 'sortUp';
-        //     }else{
-        //         $scope.reverse = true;
-        //         $scope.reverseclass = 'sortDown';
-        //     }
-        // };
         $scope.sortClass = function(col){
             if($scope.column == col ){
                 if($scope.sorttype == true){
