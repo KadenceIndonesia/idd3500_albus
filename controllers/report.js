@@ -136,7 +136,7 @@ exports.getDetailServicePoint = async function(req,res){
             if(evd[i].filename.length > 0){
                 data.push({
                     id: evd[i].id,
-                    datems: "asdsd",
+                    datems: evd[i].uploadtime,
                     city: getLokasi[1],
                     malls: getLokasi[2]
                 })
