@@ -164,7 +164,7 @@ exports.getDetailCec = async function(req,res){
             data.push({
                 id: dataCecChat[i].SbjNum,
                 datems: moment(getJsDateFromExcel(dataCecChat[i].TglChat)).format("D-MM-YYYY"),
-                channel: "Call Center",
+                channel: "Chat",
                 agent: dataCecChat[i].NamaAgent
             })
         }
@@ -172,7 +172,7 @@ exports.getDetailCec = async function(req,res){
             data.push({
                 id: dataCecCall[i].SbjNum,
                 datems: moment(getJsDateFromExcel(dataCecCall[i].TglPanggilan)).format("D-MM-YYYY"),
-                channel: "Chat",
+                channel: "Call Center",
                 agent: dataCecCall[i].NamaAgent
             })
         }
