@@ -52,7 +52,7 @@
 						<% for(let i=0;i < data[0].filename.length ; i++){ %>
 						<div class="gridcontent active delay" id="video<%= i+1 %>" data="1">
 							<div style="width: 100%; padding: 10px; text-align: center;">
-								<% if(type[1]=="jpg" || type[1]=="PNG" || type[1]=="jpeg" || type[1]=="png"){ %>
+								<% if(type[1]=="jpg" || type[1]=="PNG" || type[1]=="jpeg" || type[1]=="png" || type[1]=="JPG"){ %>
 									<img src="<%= url %><%= data[0].id %>/<%= data[0].filename[i] %>" alt="" style="height: 520px;">
 								<% }else{ %>
 								<video id="videoplayer" width="100%" height="520" controls style="margin-top: 30px">
