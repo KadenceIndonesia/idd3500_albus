@@ -90,23 +90,13 @@ exports.getDetailSalesBooth = async function(req,res){
             var lokasi = parseInt(getLokasi)
                 for(let x=0;x<dataExcel.length;x++){
                     if(dataExcel[x]["S0"]==lokasi){
-                        const filteredKota = dataKota.find(function(item, i){
-                            if(item.code === dataExcel[x]["Kota"]){
-                                index = i;
-                                return i
-                            }
-                        })
-                        const filteredMalls = dataMalls.find(function(item, i){
-                            if(item.code === dataExcel[x]["S0"]){
-                                index = i;
-                                return i
-                            }
-                        })
+                        var findArrKota = await findObj(dataKota, "code", dataExcel[x]["Kota"])
+                        var findArrMalls = await findObj(dataMalls, "code", dataExcel[x]["S0"])
                         data.push({
                             id: evd[i].id,
                             datems: getJsDateFromExcel(dataExcel[x]["TglKunjungan"]),
-                            city: filteredKota.label,
-                            malls: filteredMalls.label,
+                            city: dataKota[findArrKota].label,
+                            malls: dataMalls[findArrMalls].label,
                             agent: dataExcel[x]["NamaAgent"],
                             teamleader: dataExcel[x]["NamaLeader"]
                         })
