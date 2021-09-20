@@ -23,11 +23,12 @@ exports.getIndex = async function(req,res){
             {label: "KYC", target: 25, y: parseFloat((dataKyc.length * 100 / 25).toFixed(2)), count: dataKyc.length, color: "#036016" },
         ]
         const detailCec = [
-            {label: "Chat", target: 30, y: parseFloat((dataCecChat.length * 100 / 60).toFixed(2)), count: dataCecChat.length, color: "#069E2D" },
-            {label: "Call", target: 30, y: parseFloat((dataCecCall.length * 100 / 60).toFixed(2)), count: dataCecCall.length, color: "#058E3F" },
-            {label: "Email", target: 30, y: parseFloat((dataCecEmail.length * 100 / 60).toFixed(2)), count: dataCecEmail.length, color: "#04773B" },
-            {label: "Twitter", target: 30, y: parseFloat((dataCecTwitter.length * 100 / 60).toFixed(2)), count: dataCecTwitter.length, color: "#036016" }
+            {label: "Chat", target: 30, y: parseFloat((dataCecChat.length * 100 / 30).toFixed(2)), count: dataCecChat.length, color: "#069E2D" },
+            {label: "Call", target: 15, y: parseFloat((dataCecCall.length * 100 / 15).toFixed(2)), count: dataCecCall.length, color: "#058E3F" },
+            {label: "Email", target: 10, y: parseFloat((dataCecEmail.length * 100 / 10).toFixed(2)), count: dataCecEmail.length, color: "#04773B" },
+            {label: "Twitter", target: 10, y: parseFloat((dataCecTwitter.length * 100 / 10).toFixed(2)), count: dataCecTwitter.length, color: "#036016" }
         ]
+        console.log(detailCec)
         res.render("index",{
             login: login,
             achievement: achievement,

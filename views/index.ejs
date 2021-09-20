@@ -51,6 +51,19 @@
 					</div>
 				</div>
             </div>
+			<div class="overview full-length column shadow half">
+				<% 
+					for(let i=0;i < detailcec.length ; i++){
+				%>
+                <div class="cols-3" style="color: <%= detailcec[i].color %>; border-right: 1px solid #f5f5f5; padding: 5px 2%;">
+                    <p class="size-head3 nopad"><%= detailcec[i].label %> <b style="float: right;"><%= detailcec[i].count %>(<%= detailcec[i].y %><sup>%</sup>)</b></p>
+                    <div class="progressbar">
+                        <div class="progressresult" style="width: <%= detailcec[i].y %>%; background-color: <%= detailcec[i].color %>;"></div>
+                        <div class="progressdot" style="left: <%= detailcec[i].y - 1 %>%; background-color: <%= detailcec[i].color %>;"></div>
+                    </div>
+                </div>
+				<% } %>
+            </div>
 			<div class="cols-12 containt" style="margin: 20px 0;">
 				<div class="headtitle trans" style="margin-bottom: 0;">
 					<p class="size-head3 nopad">Detail CEC</p>
