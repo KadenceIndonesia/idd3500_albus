@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "pm2 start index.js --name 'idd3500_albus'",
-    "stop": "pm2 stop index.js--name 'idd3500_albus'",
-    "restart": "pm2 restart index.js--name 'idd3500_albus'"
+    "stop": "pm2 stop index.js --name 'idd3500_albus'",
+    "restart": "pm2 restart index.js --name 'idd3500_albus'"
   },
   "repository": {
     "type": "git",
