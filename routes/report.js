@@ -12,4 +12,6 @@ Router.get("/detail/evidence/:idc/:type", reportControllers.getDetailCabangType)
 Router.get("/ach/table", reportControllers.getAchTable)
 Router.get("/ach/chart", reportControllers.getAchChart)
 
+Router.get("/detail/jeniuscc", reportControllers.getDetailJeniusCC)
+
 module.exports = Router;
