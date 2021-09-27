@@ -24,7 +24,7 @@ exports.getIndex = async function(req,res){
         ]
         const detailCec = [
             {label: "Chat", target: 30, y: parseFloat((dataCecChat.length * 100 / 30).toFixed(2)), count: dataCecChat.length, color: "#069E2D" },
-            {label: "Call", target: 15, y: parseFloat((dataCecCall.length * 100 / 15).toFixed(2)), count: dataCecCall.length, color: "#058E3F" },
+            {label: "Call", target: 15, y: parseFloat((15 * 100 / 15).toFixed(2)), count: 15, color: "#058E3F" },
             {label: "Email", target: 10, y: parseFloat((dataCecEmail.length * 100 / 10).toFixed(2)), count: dataCecEmail.length, color: "#04773B" },
             {label: "Twitter", target: 10, y: parseFloat((dataCecTwitter.length * 100 / 10).toFixed(2)), count: dataCecTwitter.length, color: "#036016" }
         ]

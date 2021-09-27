@@ -166,7 +166,7 @@ exports.getDetailCec = async function (req, res) {
         agent: dataCecChat[i].NamaAgent,
       });
     }
-    for (let i = 0; i < dataCecCall.length; i++) {
+    for (let i = 0; i < 15; i++) {
       data.push({
         id: dataCecCall[i].SbjNum,
         datems: moment(getJsDateFromExcel(dataCecCall[i].TglPanggilan)).format(
