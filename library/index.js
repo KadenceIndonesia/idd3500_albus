@@ -85,3 +85,15 @@ global.findObj = function(array, attr, value){
         resolve(-1);
     })
 }
+
+global.getAttributeByCode = function(pid, qidx, code){
+    return new Promise(resolve => {
+        axios.get(`${process.env.APIURL}/api/${pid}/data/${qidx}/attribute/${code}`)
+        .then((response) => {
+            resolve(response.data)
+        })
+        .catch((error) => {
+            resolve(error)
+        })
+    })
+}

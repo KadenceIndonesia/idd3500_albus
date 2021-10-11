@@ -28,7 +28,6 @@ exports.getIndex = async function(req,res){
             {label: "Email", target: 10, y: parseFloat((dataCecEmail.length * 100 / 10).toFixed(2)), count: dataCecEmail.length, color: "#04773B" },
             {label: "Twitter", target: 10, y: parseFloat((dataCecTwitter.length * 100 / 10).toFixed(2)), count: dataCecTwitter.length, color: "#036016" }
         ]
-        console.log(detailCec)
         res.render("index",{
             login: login,
             achievement: achievement,
