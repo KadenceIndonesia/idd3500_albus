@@ -78,7 +78,6 @@ exports.getDetail = async function (req, res) {
 exports.getDetailSalesBooth = async function (req, res) {
   if (req.session.loggedin == true) {
     const login = req.session.data;
-    var evd = await getKepoEvd(10);
     var dataExcel = await getData(pid, "salesbooth");
     var data = [];
     for (let i = 0; i < dataExcel.length; i++) {
@@ -94,33 +93,6 @@ exports.getDetailSalesBooth = async function (req, res) {
         teamleader: dataExcel[i]["NamaLeader"],
       });
     }
-    // for (let i = 0; i < evd.length; i++) {
-    //   var evdCode = evd[i].code;
-    //   var getLokasi = evdCode.substr(evdCode.length - 2, 2);
-    //   var lokasi = parseInt(getLokasi);
-    //   for (let x = 0; x < dataExcel.length; x++) {
-    //     if (dataExcel[x]["S0"] == lokasi) {
-    //       var findArrKota = await findObj(
-    //         dataKota,
-    //         "code",
-    //         dataExcel[x]["Kota"]
-    //       );
-    //       var findArrMalls = await findObj(
-    //         dataMalls,
-    //         "code",
-    //         dataExcel[x]["S0"]
-    //       );
-    //       data.push({
-    //         id: evd[i].id,
-    //         datems: getJsDateFromExcel(dataExcel[x]["TglKunjungan"]),
-    //         city: dataKota[findArrKota].label,
-    //         malls: dataMalls[findArrMalls].label,
-    //         agent: dataExcel[x]["NamaAgent"],
-    //         teamleader: dataExcel[x]["NamaLeader"],
-    //       });
-    //     }
-    //   }
-    // }
     res.render("detail/salesbooth", {
       login: login,
       data: data,
@@ -135,21 +107,32 @@ exports.getDetailSalesBooth = async function (req, res) {
 exports.getDetailServicePoint = async function (req, res) {
   if (req.session.loggedin == true) {
     const login = req.session.data;
-    var evd = await getKepoEvd(20);
     var dataExcel = await getData(pid, "servicepoint");
     var data = [];
-    for (let i = 0; i < evd.length; i++) {
-      var evdCode = evd[i].code;
-      var getLokasi = evd[i].deskripsi.split("_");
-      if (evd[i].filename.length > 0) {
-        data.push({
-          id: evd[i].id,
-          datems: evd[i].uploadtime,
-          city: getLokasi[1],
-          malls: getLokasi[2],
-        });
-      }
+    for (let i = 0; i < dataExcel.length; i++) {
+      var findArrKota = await findObj(dataKota, "code", dataExcel[i]["Kota"]);
+      var findArrMalls = await findObj(dataMalls, "code", dataExcel[i]["S0"]);
+      data.push({
+        id: dataExcel[i].SbjNum,
+        kepo: dataExcel[i].kepo,
+        datems: dataExcel[i]["TglKunjungan"],
+        city: dataKota[findArrKota].label,
+        malls: dataMalls[findArrMalls].label,
+        agent: dataExcel[i]["NamaAgent"]
+      });
     }
+    // for (let i = 0; i < evd.length; i++) {
+    //   var evdCode = evd[i].code;
+    //   var getLokasi = evd[i].deskripsi.split("_");
+    //   if (evd[i].filename.length > 0) {
+    //     data.push({
+    //       id: evd[i].id,
+    //       datems: evd[i].uploadtime,
+    //       city: getLokasi[1],
+    //       malls: getLokasi[2],
+    //     });
+    //   }
+    // }
     res.render("detail/servicepoint", {
       login: login,
       datakota: dataKota,
